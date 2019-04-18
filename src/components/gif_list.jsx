@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Gif from './gif';
 
-class GifList extends Component {
-  renderList =() => {
-    const { ids, selectFunction } = this.props;
-    return ids.map(gif => <Gif id={gif.id} key={gif.id} selectFunction={selectFunction} />);
-  }
-
-  render() {
-    return (
-      <div className="gif-list">
-        {this.renderList()}
-      </div>
-    );
-  }
-}
+// Destructuring
+// List pattern
+const GifList = ({ ids, onSelect }) => {
+  return (
+    <div className="gif-list">
+      { ids.map(({ id }) => <Gif id={id} key={id} onClick={onSelect} />)}
+    </div>
+  );
+};
 
 export default GifList;

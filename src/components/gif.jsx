@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 
-// eslint-disable-next-line react/prefer-stateless-function
+//  Null pattern
 class Gif extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.id !== this.props.id;
+  }
+
   handleClick = () => {
-    const { id, selectFunction } = this.props;
-    selectFunction(id);
+    const { id, onClick } = this.props;
+    if (onClick) {
+      onClick(id);
+    }
   }
 
 
   render() {
     const { id } = this.props;
+    console.log(`GIF RENDER ${id}`);
+    if (!id) {
+      return null;
+    }
     const src = `https://media.giphy.com/media/${id}/200.gif`;
     return (
       <img src={src} alt="" className="gif" onClick={this.handleClick} />
